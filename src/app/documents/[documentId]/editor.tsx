@@ -10,9 +10,12 @@ import TableRow from '@tiptap/extension-table-row';
 import Image from '@tiptap/extension-image';
 import ImageResize from 'tiptap-extension-resize-image';
 import Underline from '@tiptap/extension-underline';
+import FontFamily from '@tiptap/extension-font-family';
+import TextStyle from '@tiptap/extension-text-style';
 import { useEditor, EditorContent } from '@tiptap/react';
 
 import { useEditorStore } from "@/store/use-editor-store";
+import { text } from 'stream/consumers';
 
 export const Editor = () => {
 const { setEditor } = useEditorStore();
@@ -50,6 +53,8 @@ const { setEditor } = useEditorStore();
         },
         extensions: [
             StarterKit,
+            FontFamily,
+            TextStyle,
             Underline, 
             Table,
             TableCell,

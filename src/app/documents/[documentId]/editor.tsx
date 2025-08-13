@@ -20,6 +20,8 @@ import { useEditor, EditorContent } from '@tiptap/react';
 
 import { useEditorStore } from "@/store/use-editor-store";
 import { FontSizeExtension } from "@/extensions/font-size";
+import { LineHeightExtension } from "@/extensions/line-height";
+import { Line } from 'recharts';
 
 export const Editor = () => {
 const { setEditor } = useEditorStore();
@@ -57,6 +59,10 @@ const { setEditor } = useEditorStore();
         },
         extensions: [
             StarterKit,
+            LineHeightExtension.configure({
+                types: ["paragraph", "heading"],
+                defaultLineHeight: "normal",
+            }),
             FontSizeExtension,
             TextAlign.configure({
                 types: ["heading", "paragraph"]

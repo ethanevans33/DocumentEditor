@@ -79,7 +79,7 @@ const LineHeightButton = () => {
                     key={value}
                     onClick={() => editor?.chain().focus().setLineHeight(value).run()}
                     className={cn(
-                        "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-nuetral-200/80",
+                        "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
                         editor?.getAttributes("paragraph").lineHeight === value && "bg-neutral-200/80"
                     )}
                     >
@@ -156,7 +156,7 @@ const FontSizeButton = () => {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 onKeyDown={handleKeyDown}
-                className="h-7 w-10 text-sm text-center border border-nuetral-400 rounded-sm bg-transparent focus:outline-none focus:ring-0"
+                className="h-7 w-10 text-sm text-center border border-neutral-400 rounded-sm bg-transparent focus:outline-none focus:ring-0"
                 />
             ) : (
                 <button
@@ -164,7 +164,7 @@ const FontSizeButton = () => {
                     setIsEditing(true);
                     setFontSize(currentFontSize);
                 }}
-                className="h-7 w-10 text-sm text-center border border-nuetral-400 rounded-sm bg-transparent cursor-text"
+                className="h-7 w-10 text-sm text-center border border-neutral-400 rounded-sm bg-transparent cursor-text"
                 >
                     {currentFontSize}
                 </button>
@@ -212,7 +212,7 @@ const ListButton = () => {
                     key={label}
                     onClick={onClick}
                     className={cn(
-                        "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-nuetral-200/80",
+                        "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
                         isActive() && "bg-neutral-200/80"
                     )}
                     >
@@ -266,8 +266,8 @@ const AlignButton = () => {
                     key={value}
                     onClick={() => editor?.chain().focus().setTextAlign(value).run()}
                     className={cn(
-                        "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-nuetral-200/80",
-                        editor?.isActive("textAlign", { textAlign: value }) && "bg-neutral-200/80"
+                        "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+                        editor?.isActive("textAlign", { textAlign: value }) && "bg-nuetral-200/80"
                     )}
                     >
                         <Icon className="size-4"/>
@@ -301,7 +301,7 @@ const ImageButton = () => {
             }
         }
 
-        input.click;
+        input.click();
     };
 
     const handleImageUrlSubmit = () => {
@@ -468,7 +468,7 @@ const HeadingLevelButton = () => {
     const getCurrentHeading = () => {
         for (let level = 1; level <= 5; level++) {
             if (editor?.isActive("heading", { level })) {
-                return 'Heading  ${level}';
+                return `Heading  ${level}`;
             }
         }
 
@@ -500,7 +500,7 @@ const HeadingLevelButton = () => {
                         }
                     }}
                     className={cn(
-                        "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-nuetral-200/80",
+                        "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
                         (value === 0 && !editor?.isActive("heading")) || editor?.isActive("heading", {level: value}) && "bg-neutral-200/80"
                     )}
                     >
@@ -530,7 +530,7 @@ const FontFamilyButton = () => {
                 className="h-7 w-[120px] shrink-0 flex items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
                 >
                 <span className="truncate">
-                    {editor?.getAttributes("textstyle").fontFamily || "Arial"}
+                    {editor?.getAttributes("textStyle").fontFamily || "Arial"}
                 </span>
                 <ChevronDownIcon className="ml-2 size-4 shrink-0"/>
                 </button>
@@ -541,7 +541,7 @@ const FontFamilyButton = () => {
                     onClick={() => editor?.chain().focus().setFontFamily(value).run()}
                     key={value}
                     className={cn(
-                        "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-nuetral-200/80",
+                        "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
                         editor?.getAttributes("textStyle").fontFamily === value && "bg-neutral-200/80"
                     )}
                     style={{ fontFamily: value }}
@@ -569,7 +569,7 @@ const ToolbarButton = ({
         <button
         onClick={onClick}
         className={cn(
-            "text-sm h-7 min-w-7 flex items-center justift-center rounded-sm hover:bg-nuetral-200/80",
+            "text-sm h-7 min-w-7 flex items-center justift-center rounded-sm hover:bg-neutral-200/80",
             isActive && "bg-neutral-200/80",
         )}
         >
@@ -636,8 +636,8 @@ const { editor } = useEditorStore();
             {
                 label: "comment",
                 icon: MessageSquarePlusIcon,
-                onClick: () => console.log ("TODO: Comment"),
-                isActive: false,
+                onClick: () => editor?.chain().focus().addPendingComment().run(),
+                isActive: editor?.isActive("liveblocksCommentMark"),
             },
             {
                 label: "List todo",
@@ -658,19 +658,19 @@ const { editor } = useEditorStore();
             {sections[0].map((item) => (
                 <ToolbarButton key={item.label} {...item} />
             ))}
-            <Separator orientation="vertical" className="h-6 bg-nuetral-300"/>
+            <Separator orientation="vertical" className="h-6 bg-neutral-300"/>
             <FontFamilyButton />   
-            <Separator orientation="vertical" className="h-6 bg-nuetral-300"/>
+            <Separator orientation="vertical" className="h-6 bg-neutral-300"/>
             <HeadingLevelButton />
-            <Separator orientation="vertical" className="h-6 bg-nuetral-300"/>
+            <Separator orientation="vertical" className="h-6 bg-neutral-300"/>
             <FontSizeButton />
-            <Separator orientation="vertical" className="h-6 bg-nuetral-300"/>
+            <Separator orientation="vertical" className="h-6 bg-neutral-300"/>
             {sections[1].map((item) => (
                 <ToolbarButton key={item.label} {...item} />
             ))}
             <TextColorButton />
             <HighlightColorButton />
-            <Separator orientation="vertical" className="h-6 bg-nuetral-300"/>
+            <Separator orientation="vertical" className="h-6 bg-neutral-300"/>
             <LinkButton />
             <ImageButton />
             <AlignButton />

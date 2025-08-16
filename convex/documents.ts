@@ -1,4 +1,4 @@
-import { ConvexError, v } from "convex/values";
+import { ConvexError, convexToJson, v } from "convex/values";
 import { paginationOptsValidator } from "convex/server";
 import { mutation, query } from "./_generated/server";
 import { Underdog } from "next/font/google";
@@ -115,12 +115,20 @@ export const updateById = mutation({
       }
 
       const isOwner = document.ownerId === user.subject;
-      const isOrganizationMember = document.organizationId === organizationId;
+      const isOrganizationMember = 
+        !!(document.organizationId && document.organizationId === organizationId);
 
       if(!isOwner && !isOrganizationMember){
         throw new ConvexError("Unauthorized");
       }
 
       return await ctx.db.patch(args.id, { title: args.title });
+  },
+});
+
+export const getById = query({
+  args: { id: v.id("documents")},
+  handler: async (ctx, { id }) => {
+    return await ctx.db.get(id);
   },
 });

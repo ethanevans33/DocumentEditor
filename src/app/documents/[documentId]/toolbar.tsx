@@ -14,8 +14,6 @@ import {
     UnderlineIcon, 
     Undo2Icon,
     ChevronDownIcon,
-    Heading,
-    Circle,
     HighlighterIcon,
     Link2Icon,
     ImageIcon,
